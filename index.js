@@ -2,6 +2,8 @@ const express = require("express")
 const taskRouter = require("./routes/tasks")
 const bodyParser = require('body-parser') // анализирует тела всех входящих запросов и записывает в req.data
 // const usersRouter = require("./routes/users")
+require('./config/passport')
+
 const cors = require("cors") // для получения сторонних запросов
 
 const port = 5000
@@ -13,6 +15,7 @@ app.use(bodyParser.json())
 
 const dbConfig = require('./config/database.config')
 const mongoose = require('mongoose')
+const userRouter = require('./routes/users')
 mongoose.Promise = global.Promise
 mongoose.connect(dbConfig.url, {
   useNewUrlParser: true
@@ -24,6 +27,7 @@ mongoose.connect(dbConfig.url, {
 })
 
 app.use(taskRouter)
+app.use(userRouter)
 // app.use(usersRouter)
 
 app.get('/', (req,res) => {

@@ -12,4 +12,7 @@ const TaskShema = mongoose.Schema({
   }
   )
 
-module.exports = mongoose.model('Task', TaskShema)
+module.exports = {
+  TaskShema,
+  Task: mongoose.model('Task', TaskShema)
+}
